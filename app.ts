@@ -1,5 +1,8 @@
 import express from "express";
 import productsRouter from "./products/products.routes";
+import { errorHandler } from "./common/middleware/error.middleware";
+import { notFoundHandler } from "./common/middleware/notFound.middleware";
+import helmet from "helmet";
 import * as winston from "winston";
 import * as expressWinston from "express-winston";
 import dotenv from "dotenv";
@@ -8,6 +11,7 @@ dotenv.config();
 
 const app: express.Application = express();
 
+app.use(helmet());
 app.use(express.json());
 
 const loggerOptions: expressWinston.LoggerOptions = {
@@ -27,7 +31,8 @@ if (!process.env.DEBUG) {
 }
 
 app.use(expressWinston.logger(loggerOptions));
-
 app.use(`/products`, productsRouter);
+app.use(errorHandler);
+app.use(notFoundHandler);
 
 export default app;
