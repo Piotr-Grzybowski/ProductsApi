@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev --respawn --pretty --transpile-only server.ts",
+    "start": "NODE_ENV=development ts-node-dev --respawn --pretty --transpile-only server.ts",
     "debug": "export DEBUG=* && npm run start",
-    "test": "jest",
-    "test:coverage": "jest --coverage"
+    "test": "NODE_ENV=testing jest",
+    "test:coverage": "NODE_ENV=testing jest --coverage"
   },
   "repository": {
     "type": "git",
@@ -40,7 +40,9 @@
     "express-winston": "^4.2.0",
     "helmet": "^6.0.0",
     "mongoose": "^6.7.2",
+    "reflect-metadata": "^0.1.13",
     "shortid": "^2.2.16",
+    "typedi": "^0.10.0",
     "winston": "^3.8.2"
   }
 }

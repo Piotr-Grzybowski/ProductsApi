@@ -19,7 +19,6 @@ class ProductsController {
   async getProductById(req: Request, res: Response) {
     try {
       const product = await productsService.readById(req.params.productId);
-      log(product);
       res.status(200).send(product);
     } catch (err) {
       res.status(500).send({

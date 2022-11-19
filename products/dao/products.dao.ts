@@ -41,13 +41,11 @@ class ProductsDao {
   }
 
   async updateProductById(productId: string, productData: UpdateProductDTO) {
-    log(productId);
     const existingProduct = await this.Product.findOneAndUpdate(
       { _id: productId },
       { $set: { ...productData, UpdateDate: Date.now() } },
       { new: true }
     ).exec();
-    log(existingProduct);
 
     return existingProduct || false;
   }
