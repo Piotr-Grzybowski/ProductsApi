@@ -3,10 +3,12 @@ import mongooseService from "../../common/services/mongoose.service";
 import { CreateProductDto } from "../dto/create.product.dto";
 import { UpdateProductDTO } from "../dto/update.product.dto";
 import debug from "debug";
+import { Service, Container } from "typedi";
 
 const log: debug.IDebugger = debug("app:products-dao");
 
-class ProductsDao {
+@Service()
+export class ProductsDao {
   Schema = mongooseService.getMongoose().Schema;
 
   productSchema = new this.Schema(
@@ -55,4 +57,4 @@ class ProductsDao {
   }
 }
 
-export default new ProductsDao();
+export default Container.get(ProductsDao);

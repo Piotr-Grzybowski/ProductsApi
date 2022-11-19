@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import express from "express";
 import productsRouter from "./products/products.routes";
 import { errorHandler } from "./common/middleware/error.middleware";

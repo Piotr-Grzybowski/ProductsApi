@@ -1,10 +1,14 @@
 import { Request, Response } from "express";
 import productsService from "../services/products.service";
+import { ProductsService } from "../services/products.service";
 import debug from "debug";
+import { Container, Service } from "typedi";
 
 const log: debug.IDebugger = debug("app:products-controller");
 
+@Service()
 class ProductsController {
+  constructor(private productsService: ProductsService) {}
   async listProducts(req: Request, res: Response) {
     try {
       const products = await productsService.list();
@@ -61,4 +65,4 @@ class ProductsController {
   }
 }
 
-export default new ProductsController();
+export default Container.get(ProductsController);
